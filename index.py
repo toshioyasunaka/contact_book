@@ -43,25 +43,60 @@ def show_contact(contact):
 def edit_contact(contacts):
   show_contacts(contacts)
   contact_index = int(input("\nQual o número do contato que deseja editar? "))
-  contact_index_adjusted = contact_index - 1
-  show_contact(contacts[contact_index_adjusted])
+  contact_adjusted_index = contact_index - 1
+  show_contact(contacts[contact_adjusted_index])
   chosen_information = input("\nQual informação deseja editar? ")
   if chosen_information == "1":
     edited_name = input("Como deseja salvar o nome agora? ")
-    contacts[contact_index_adjusted]["name"] = edited_name
+    contacts[contact_adjusted_index]["name"] = edited_name
+    print(f"O nome do contato foi alterado para {edited_name}")
   if chosen_information == "2":
     edited_cellphone = input("Como deseja salvar o número agora? ")
-    contacts[contact_index_adjusted]["cellphone"] = edited_cellphone
+    contacts[contact_adjusted_index]["cellphone"] = edited_cellphone
+    print(f"O número do contato foi alterado para {edited_cellphone}")
   if chosen_information == "3":
     edited_email = input("Como deseja salvar o e-mail agora? ")
-    contacts[contact_index_adjusted]["email"] = edited_email
+    contacts[contact_adjusted_index]["email"] = edited_email
+    print(f"O e-mail do contato foi alterado para {edited_email}")
   if chosen_information == "4":
     edited_favorite = input("Quer favoritar o contato? (s/n): ")
     if edited_favorite == "s":
-      contacts[contact_index_adjusted]["favorite"] = True
+      contacts[contact_adjusted_index]["favorite"] = True
+      print("O contato foi marcado como favorito")
     elif edited_favorite == "n":
-      contacts[contact_index_adjusted]["favorite"] = False
+      contacts[contact_adjusted_index]["favorite"] = False
+      print("O contato foi removido dos favoritos")
     else:
+      print("Ação inválida!")
+      return
+  return
+
+def mark_contact_as_favorite(contacts) :
+  show_contact(contacts)
+  contact_index = int(input("\nDeseja modificar o favoritismo de qual contato? "))
+  contact_adjusted_index = contact_index - 1
+  contact_name = contacts[contact_adjusted_index]["name"]
+  if contacts[contact_adjusted_index]["favorite"] == True:
+    response = input(f"{contact_name} está na lista de favoritos, deseja removê-lo? (s/n)")
+    if response == "s":
+      contacts[contact_adjusted_index]["favorite"] == False
+      return
+    if response == "n":
+      contacts[contact_adjusted_index]["favorite"] == True
+      return
+    else:
+      print("Resposta inválida!")
+      return
+  if contacts[contact_adjusted_index]["favorite"] == False:
+    response = input("{contact_name} NÃO está na lista de favoritos, deseja adicioná-lo? (s/n)")
+    if response == "s":
+      contacts[contact_adjusted_index]["favorite"] == True
+      return
+    if response == "n":
+      contacts[contact_adjusted_index]["favorite"] == False
+      return
+    else:
+      print("Resposta inválida!")
       return
   return
 
@@ -87,6 +122,9 @@ while True:
 
   if choice == "3":
     edit_contact(contacts)
+
+  if choice == "4":
+    mark_contact_as_favorite(contacts)
 
   elif choice == "7":
     break
