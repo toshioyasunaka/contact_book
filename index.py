@@ -35,7 +35,8 @@ def show_contact(contact):
       return "Favoritar/Desfavoritar"
 
   print("\n Informações do contato:")
-  for index, infos in enumerate(list(contact.items())):
+  print(contact)
+  for index, infos in enumerate(list(contact[0].items())):
     adjusted_index = index + 1
     print(f"{adjusted_index}. {handle_key(infos[0])} - {infos[1]}")
   return
@@ -72,28 +73,32 @@ def edit_contact(contacts):
   return
 
 def mark_contact_as_favorite(contacts) :
-  show_contact(contacts)
+  show_contacts(contacts)
   contact_index = int(input("\nDeseja modificar o favoritismo de qual contato? "))
   contact_adjusted_index = contact_index - 1
   contact_name = contacts[contact_adjusted_index]["name"]
   if contacts[contact_adjusted_index]["favorite"] == True:
-    response = input(f"{contact_name} está na lista de favoritos, deseja removê-lo? (s/n)")
+    response = input(f"{contact_name} está na lista de favoritos, deseja removê-lo? (s/n) ")
     if response == "s":
-      contacts[contact_adjusted_index]["favorite"] == False
+      contacts[contact_adjusted_index]["favorite"] = False
+      print(f"{contact_name} foi removido dos favoritos com sucesso")
       return
     if response == "n":
-      contacts[contact_adjusted_index]["favorite"] == True
+      contacts[contact_adjusted_index]["favorite"] = True
+      print("Ação cancelada com sucesso")
       return
     else:
       print("Resposta inválida!")
       return
   if contacts[contact_adjusted_index]["favorite"] == False:
-    response = input("{contact_name} NÃO está na lista de favoritos, deseja adicioná-lo? (s/n)")
+    response = input(f"{contact_name} NÃO está na lista de favoritos, deseja adicioná-lo? (s/n) ")
     if response == "s":
-      contacts[contact_adjusted_index]["favorite"] == True
+      contacts[contact_adjusted_index]["favorite"] = True
+      print(f"{contact_name} foi adicionado como favorito!")
       return
     if response == "n":
-      contacts[contact_adjusted_index]["favorite"] == False
+      contacts[contact_adjusted_index]["favorite"] = False
+      print("Ação cancelada com sucesso")
       return
     else:
       print("Resposta inválida!")
