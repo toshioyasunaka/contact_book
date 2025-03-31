@@ -105,6 +105,14 @@ def mark_contact_as_favorite(contacts) :
       return
   return
 
+def show_favorites_contacts(contacts):
+  favorites = []
+  for contact in contacts:
+    if contact["favorite"]:
+      favorites.append(contact)
+  show_contacts(favorites)
+  return
+
 contacts = []
 while True:
   print("\nMenu da Lista de Contatos")
@@ -130,6 +138,9 @@ while True:
 
   if choice == "4":
     mark_contact_as_favorite(contacts)
+
+  if choice == "5":
+    show_favorites_contacts(contacts)
 
   elif choice == "7":
     break
