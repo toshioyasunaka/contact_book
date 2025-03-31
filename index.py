@@ -113,6 +113,14 @@ def show_favorites_contacts(contacts):
   show_contacts(favorites)
   return
 
+def remove_contact(contacts):
+  show_contacts(contacts)
+  contact_index = int(input("Qual contato deseja remover? "))
+  contact_adjusted_index = contact_index - 1
+  contacts.remove(contacts[contact_adjusted_index])
+  print("Contato removido!")
+  return
+
 contacts = []
 while True:
   print("\nMenu da Lista de Contatos")
@@ -141,6 +149,9 @@ while True:
 
   if choice == "5":
     show_favorites_contacts(contacts)
+
+  if choice == "6":
+    remove_contact(contacts)
 
   elif choice == "7":
     break
